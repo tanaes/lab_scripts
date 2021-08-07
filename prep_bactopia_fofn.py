@@ -65,10 +65,10 @@ def format_fofn(pe_seqs,
         fofn_df['extra'] = extra
     else:
         fofn_df['extra'] = ''
-
     fofn_df['runtype'] = runtype
-
-    return(fofn_df[['runtype','r1','r2','extra']])
+    print(fofn_df)
+    fofn_df = fofn_df[['runtype','r1','r2','extra']]
+    return(fofn_df)
 
 
 parser = argparse.ArgumentParser()
@@ -102,8 +102,9 @@ def main():
 
     ilm_re = compile(ilm_regex)
     seq_dict, unmatched = parse_seq_files(files_list, ilm_re)
-
-    fofn_df = format_fofn(seq_dict)
+    seq_df = pd.DataFrame.from_dict(seq_dict, orient='index')
+    pe_seqs = match_pe_seqs(sample_df, seq_df)
+    fofn_df = format_fofn(pe_seqs)
 
     fofn_df.to_csv(fofn_fp, sep='\t')
 

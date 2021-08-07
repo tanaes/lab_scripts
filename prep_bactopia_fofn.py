@@ -68,7 +68,7 @@ def format_fofn(pe_seqs,
 
     fofn_df['runtype'] = runtype
 
-    return(fofn_df)
+    return(fofn_df[['runtype','r1','r2','extra']])
 
 
 parser = argparse.ArgumentParser()

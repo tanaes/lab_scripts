@@ -38,11 +38,14 @@ def parse_seq_files(seq_fps,
             unmatched.append(file)
     return(seq_dict, unmatched)
 
-def match_pe_seqs(sample_df, seq_df):
+def match_pe_seqs(sample_df, seq_df, match_col=None):
     seqs = {}
     unmatched = []
     for i, row in sample_df.iterrows():
-        sample = row['Sample']
+        if match_col:
+            sample = row[match_col]
+        else:
+            sample = i
         sample_reads = seq_df.loc[seq_df['sample'] == sample,:]
         if len(sample_reads) == 2:
             seqs[sample] = {'r1': sample_reads.loc[sample_reads['read'] == 'R1'].index[0],
@@ -76,6 +79,10 @@ parser.add_argument('--sample_sheet',
                     '-s',
                     required=True,
                     type=str)
+parser.add_argument('--match_col', 
+                    '-m',
+                    required=False,
+                    type=str)
 parser.add_argument('--output_fp', 
                     '-o',
                     required=True,
@@ -95,6 +102,7 @@ def main():
     files_dir = args.seq_dir
     ilm_regex = args.ilm_regex
     fofn_fp = args.output_fp
+    match_col = args.match_col
 
     sample_df = import_sample_sheet(sample_sheet_fp)
 
@@ -103,7 +111,7 @@ def main():
     ilm_re = compile(ilm_regex)
     seq_dict, unmatched = parse_seq_files(files_list, ilm_re)
     seq_df = pd.DataFrame.from_dict(seq_dict, orient='index')
-    pe_seqs = match_pe_seqs(sample_df, seq_df)
+    pe_seqs = match_pe_seqs(sample_df, seq_df, match_col=match_col)
     fofn_df = format_fofn(pe_seqs)
 
     fofn_df.to_csv(fofn_fp, sep='\t')

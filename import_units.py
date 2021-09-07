@@ -84,7 +84,7 @@ def import_df(df_path, match_column, seq_dirs, name_column,
     if fofn_fp:
         with open(fofn_fp, 'w') as f:
             f.write('sample\truntype\tr1\tr2\textra')
-            for sample, r1, r2 in seq_tuples:
+            for sample, _, r1, r2 in seq_tuples:
                 f.write('%s\n' % '\t'.join([sample, 'paired-end', r1, r2, '']))
     else:
         with open(samples_fp, 'w') as f:

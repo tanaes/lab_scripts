@@ -81,6 +81,7 @@ def import_df(df_path, match_column, seq_dirs, name_column,
                     seq_tuples.append((name, unit_name, r1, r2))
                     break
 
+    print(seq_tuples)
     if fofn_fp:
         with open(fofn_fp, 'w') as f:
             f.write('sample\truntype\tr1\tr2\textra')

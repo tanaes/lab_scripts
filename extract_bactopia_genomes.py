@@ -25,7 +25,7 @@ def extract_genomes(summary_fp, bactopia_dir, out_dir, copy_exclude):
     summary_df = pd.read_csv(summary_fp, sep='\t', header=0, index_col=0)
 
     assem_fp_pt = join(bactopia_dir, '%s/assembly/%s.fna')
-    makedirs(out_dir, exists_ok=True)
+    makedirs(out_dir, exist_ok=True)
 
     for i, row in summary_df.iter_rows():
         rank = row['rank']

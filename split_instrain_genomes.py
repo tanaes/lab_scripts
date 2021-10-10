@@ -162,7 +162,7 @@ def split_sample_genomes(genome_df,
             genome_cov(parsed[g],
                        bam_fp,
                        min_cov=min_cov)
-            write_genome_fasta(join(outdir, '{0}.{2}.{1}{3}'.format(host,
+            write_genome_fasta(join(outdir, '{0}.{2}.{1}{3}'.format(mg_ind,
                                                                     g,
                                                                     *splitext(genome_name))),
                                parsed[g])

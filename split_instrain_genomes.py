@@ -169,7 +169,7 @@ def extract_genomes(align_dir,
                     stb_fp,
                     output_dir):
 
-    makedirs(output_dir, exists_ok=True)
+    makedirs(output_dir, exist_ok=True)
 
     mgs = glob(join(profile_dir,'*'))
 

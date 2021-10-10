@@ -172,6 +172,12 @@ def extract_genomes(align_dir,
     makedirs(output_dir, exist_ok=True)
 
     mgs = glob(join(profile_dir,'*'))
+    genome_fps = pd.read_csv(genome_list_fp,
+                             sep='\t',
+                             header=None,
+                             index_col=0,
+                             squeeze=True)
+
 
     stb_df = pd.read_csv(stb_fp, 
                          sep='\t',

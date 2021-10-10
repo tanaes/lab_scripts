@@ -172,8 +172,12 @@ def extract_genomes(align_dir,
     makedirs(output_dir, exist_ok=True)
 
     mgs = glob(join(profile_dir,'*'))
-    
-    stb_df = pd.read_csv(stb_fp, sep='\t', header=None, names=['scaffold','genome'])
+
+    stb_df = pd.read_csv(stb_fp, 
+                         sep='\t',
+                         header=None,
+                         names=['scaffold','genome'],
+                         index_col=0)
 
     for mg in mgs:
         print('looking at %s' % mg)

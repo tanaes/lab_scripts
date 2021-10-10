@@ -223,6 +223,7 @@ def extract_genomes(align_dir,
                          names=['scaffold','genome'],
                          index_col=0)
 
+    genome_data_dfs = {}
     for mg in mgs:
         print('looking at %s' % mg)
         
